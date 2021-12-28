@@ -8,6 +8,7 @@ import {
 import BookDetail from '../BookDetail/BookDetail';
 import BookList from "../BookList/BookList"
 import "../Header/header.css"
+import NotFound from './NotFound';
 
 class Header extends Component { 
   render() {
@@ -15,7 +16,7 @@ class Header extends Component {
       <div className="book">
         <Router>
           <div className="book__choice">
-            <Link to="/">
+            <Link to="/#">
               <i className="fas fa-book-open fa-lg" />
             </Link>
             <div className="header--choice">
@@ -54,10 +55,11 @@ class Header extends Component {
                 <BookList name={"Nodejs"} />
               </Route>
               <Route exact path="/books/:id" component={BookDetail} />
-              <Route extract path="/">
+              {/* <Route exact path="/books/category/:categoryName" component={BookList} /> */}
+              <Route exact path="">
                 <BookList name={"HTML"} />
               </Route>
-
+              <Route component={<NotFound/>}/>
             </Switch>
           </div>
         </Router>

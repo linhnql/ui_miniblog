@@ -9,13 +9,21 @@ export default class BookList extends Component {
         super();
         this.state = {
             book: [], 
-        }
+        };
     }
 
-    componentDidMount() {
+    getData(){
         axios.get(`http://localhost:3000/books?category=${this.props.name}`)
             .then(res => { this.setState({ book: res.data }) })
             .catch(console.error());
+    }
+
+    componentDidMount() {
+        this.getData();
+    }
+
+    componentDidUpdate(){
+        this.getData();
     }
 
     render() {
@@ -28,9 +36,8 @@ export default class BookList extends Component {
                         <div key={index}>
                             <BookCover book={data} />
                         </div>
-                        
                     )}
-                    <Pagination count={5}  />
+                    {/* <Pagination count={5} data={book} /> */}
                 </div>
             </div>
         )
