@@ -1,0 +1,33 @@
+.about{
+    width: 62%;
+    float: right;
+    margin-top: 2em;
+    margin-right: 5.5em;
+    background-color: #fff;
+    border-radius: 20px;
+    
+    &__body{
+        margin: 1.5em 3em;
+
+        &__header1{
+            font-size: 40px;
+        }
+
+        &__header2{
+            font-size: 30px;
+        }
+
+        p{
+            font-size: 1.2rem;
+        }
+        
+        &__touch{
+            padding: 15px 20px;
+            background-color: #969696;
+            border-radius: 5px;
+            font-size: 22px;
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}
