@@ -13,11 +13,12 @@ const Blog = (blog) => {
         <div className={style["blog__body__title"]}>
           {blog.title}
         </div>
-        <div className={style["blog__body__info"]}>June 25, 2020 | ART</div>
-        <span>
-          The rich text elements allows you to create and format headings,
+        <div className={style["blog__body__info"]}>June 25, 2020 | {blog.category} </div>
+        <span> { blog.intro }
+          {/* The rich text elements allows you to create and format headings,
           paragraph, blockquotes, image. and video all in one place onstead of
-          having to add and format.<span> </span>
+          having to add and format. */}
+          <span> </span>
           <Link className={style["blog__body__info"]} to="/id">
             Read more...
           </Link>
