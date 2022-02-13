@@ -1,0 +1,35 @@
+.blog{
+    width: 62%;
+    height: 35vh;
+    float: right;
+    margin: 2em 5.5em 0 0;
+    background-color: #fff;
+    border-radius: 10px;
+
+    img{
+        height: 80%;   
+        margin: 25px; 
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    &__body{
+        width: 69%;
+        float: right;
+        margin-top: 15px;
+        margin-right: 10px;
+
+        &__info, span{
+            color: rgb(192,184,178);
+            font-size: 1.2rem;
+        }
+        
+        &__info, &__title{
+            margin-bottom: 10px;
+        }
+
+        &__title{
+            font-size: 30px;
+        }
+    }
+}

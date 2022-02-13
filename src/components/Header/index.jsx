@@ -4,6 +4,10 @@ import Info from "../Info";
 import About from "../About";
 import style from "./styles.module.scss";
 import Contact from "../Contact";
+import BlogDetail from "../BlogDetail";
+import Blog from "../Blog";
+import BlogList from "../Blog/BlogList";
+import AddBlog from "../BlogDetail/AddBlog";
 
 export default class Header extends Component {
   render() {
@@ -42,7 +46,12 @@ export default class Header extends Component {
               <Route exact path="/contact">
                 <Contact />
               </Route>
-              <Route path="/"></Route>
+              <Route path="/id">
+                <BlogDetail />
+              </Route>
+              <Route path="/">
+                <BlogList />
+              </Route>
             </Switch>
             <Info />
           </div>

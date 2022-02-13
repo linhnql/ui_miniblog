@@ -20,16 +20,16 @@ export default class Info extends Component {
           </p>
           <hr />
           <div className={style["info__body--social"]}>
-            <a href="https://facebook.com" target="_blank" target="_blank">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer">
               <i className="fab fa-facebook-square" />
             </a>
-            <a href="https://instagram.com" target="_blank">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <i className="fab fa-instagram-square" />
             </a>
-            <a href="https://twitter.com" target="_blank">
+            <a href="https://twitter.com" target="_blank" rel="noreferrer">
               <i className="fab fa-twitter" />
             </a>
-            <a href="https://linkedin.com" target="_blank">
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
               <i className="fab fa-linkedin-in" />
             </a>
             <p> BUILT WITH WEBFLOW</p>

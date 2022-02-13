@@ -1,14 +1,25 @@
-.about{
+.detail{
     width: 62%;
     float: right;
-    margin-top: 2em;
-    margin-right: 5.5em;
+    margin: 2em 5.5em 11em 0;
+    // margin-right: 5.5em;
     background-color: #fff;
     border-radius: 20px;
     
+    img{
+        width: 100%; 
+        height: 370px; 
+        border-radius: 20px 20px 0 0;
+        object-fit: cover; 
+        // object-position: 0 5%;
+    }
+
     &__body{
         margin: 1.5em 3em;
 
+        &__info{
+            color: rgb(192,184,178);
+        }
         &__header1{
             font-size: 40px;
         }
@@ -26,13 +37,16 @@
         }
         
         &__touch{
-            padding: 11px 25px;
+            position:absolute;
+            padding: 10px 20px;
             background-color: #969696;
             border-radius: 10px;
-            font-size: 1.8rem;
+            font-size: 30px;
             font-weight: 450;
             color: #fff;
             text-decoration: none;
+            margin-top: 1.5em;
+            margin-left: -1.6em;
         }
 
         &__touch:hover{
@@ -40,12 +54,13 @@
         }
 
         &__touch:focus{
-            background-color: #bbbbbb;
-        }
-
-        &__hide{
-            margin-top: 7px;
-            color: #fff;
+            background-color: #686868;
         }
     }
+}
+
+hr{
+    border-top: 1px solid #afaaaa;
+    width: 17%;
+    margin-left: 0px;
 }

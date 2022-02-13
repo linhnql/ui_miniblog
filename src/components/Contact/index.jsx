@@ -1,42 +1,45 @@
 import React, { useState } from "react";
-// import axios from 'axios';
+import { alertService } from "../Alert/alert.service";
 import style from "./styles.module.scss";
 
-import { Navigate } from "react-router-dom";
 const Contact = () => {
-  const [contact, setContact] = useState({
+  const [values, setValues] = useState({
     name: "",
     email: "",
     message: ""
   });
-  const [redirect, setRedirect] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const handleChange = (event) => {
-    setContact({
-      ...contact,
+    setValues({
+      ...values,
       [event.target.name]: event.target.value
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    console.log(contact);
-
-    // axios.post('http://localhost:8080/post/backend/v1/contacts', {
-    //     ...contact
-    // },
-    // {
-    //     headers: {
-    //         apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
-    //         "Access-Control-Allow-Origin": "*"
-    //     }
-    // }).then((request) => {
-    //     setContact(request.data);
-    //     alert('Add Contact Successful');
-    //     setRedirect(true);
-    //     console.log(request)
-    // }).catch((error) => {alert(error)})
+    setLoader(true);
+    if (!values.name || !values.email || !values.message) {
+      alertService.error("Please enter ALL mandatory fields!");
+    } else {
+      alertService.success("Message Sent! Thank you for contacting us.");
+      setLoader(false);
+      // axios.post('http://localhost:8080/blogs/backend/v1/contacts', {
+      //     ...value
+      // },
+      // {
+      //     headers: {
+      //         apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
+      //         "Access-Control-Allow-Origin": "*"
+      //     }
+      // }).then((request) => {
+      //     setValues(request.data);
+      //     alertService.success('Message Sent! Thank you for contacting us.');
+      //     setLoader(true);
+      //     console.log(request)
+      // }).catch((error) => {alertService.error('Something went wrong! Please try again.')})
+    }
   };
   return (
     <div className={style["contact"]}>
@@ -57,41 +60,47 @@ const Contact = () => {
           asperiores incidunt vel autem fuga minus sint eligendi vitae. Facilis,
           quo?
         </p>
-        <div>
-          <form
-            className={style["contact__body--form"]}
-            onSubmit={handleSubmit}
-          >
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Enter your name"
-              value={contact.name}
-              onChange={handleChange}
-            />
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Enter your email address"
-              value={contact.email}
-              onChange={handleChange}
-            />
-            <label htmlFor="message">Email Address</label>
-            <textarea
-              rows="6"
-              name="message"
-              id="message"
-              placeholder="Enter your message"
-              value={contact.message}
-              onChange={handleChange}
-            ></textarea>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+        <form
+          className={style["contact__body--form"]}
+          // method="post"
+          action="action_page.java"
+          // onSubmit={handleSubmit}
+        >
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+            value={values.name}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            value={values.email}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="message">Message</label>
+          <textarea
+            name="message"
+            rows="6"
+            placeholder="Enter your message"
+            value={values.message}
+            onChange={handleChange}
+            required
+          ></textarea>
+          <input
+            type="submit"
+            name="submit"
+            value="Submit"
+            // onClick={(e) => handleSubmit(e)}
+          />
+        </form>
       </div>
     </div>
   );
