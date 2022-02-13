@@ -4,18 +4,21 @@ import axios from 'axios';
 
 const BlogList = () => {
     const [blogs, setBlogs] = useState([]);
-    const [page, setPage] = useState(0);
-
+    const baseURL = `http://localhost:8080/miniblog/backend/v1/blogs/`;
+    const headers = {
+        'apikey': "2347edfd-c55c-4f59-96ee-600492f904f3",
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    }
+    
     useEffect(() => {
-      axios.get("http://localhost:8080/miniblog/backend/v1/blogs", {
-        headers: {
-            apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
-            'Access-Control-Allow-Origin': '*'
-        }
-      }).then((item) => {
-            console.log(item);
-      });
-    }, [page]);
+        axios.get(baseURL, { headers })
+            .then((response) => {
+                setBlogs(response.data);
+            });
+        }, []);
+
+    console.log(blogs)
     
 
     return(
