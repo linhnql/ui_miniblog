@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { alertService } from "../Alert/alert.service";
 import style from "./styles.module.scss";
+import axios from "axios";
 
 const Contact = () => {
   const [values, setValues] = useState({
@@ -23,22 +24,22 @@ const Contact = () => {
     if (!values.name || !values.email || !values.message) {
       alertService.error("Please enter ALL mandatory fields!");
     } else {
-      alertService.success("Message Sent! Thank you for contacting us.");
-      setLoader(false);
-      // axios.post('http://localhost:8080/blogs/backend/v1/contacts', {
-      //     ...value
-      // },
-      // {
-      //     headers: {
-      //         apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
-      //         "Access-Control-Allow-Origin": "*"
-      //     }
-      // }).then((request) => {
-      //     setValues(request.data);
-      //     alertService.success('Message Sent! Thank you for contacting us.');
-      //     setLoader(true);
-      //     console.log(request)
-      // }).catch((error) => {alertService.error('Something went wrong! Please try again.')})
+      // alertService.success("Message Sent! Thank you for contacting us.");
+      // setLoader(false);
+      axios.post('http://localhost:8080/miniblog/backend/v1/contacts', {
+          ...values
+      },
+      {
+          headers: {
+              apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
+              "Access-Control-Allow-Origin": "*"
+          }
+      }).then((request) => {
+          setValues(request.data);
+          alertService.success('Message Sent! Thank you for contacting us.');
+          setLoader(true);
+          console.log(request)
+      }).catch((error) => {alertService.error('Something went wrong! Please try again.')})
     }
   };
   return (
@@ -62,9 +63,9 @@ const Contact = () => {
         </p>
         <form
           className={style["contact__body--form"]}
-          // method="post"
+          method="post"
           action="action_page.java"
-          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
         >
           <label htmlFor="name">Name</label>
           <input

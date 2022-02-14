@@ -1,41 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 import axios from 'axios';
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import Moment from 'react-moment';
 
 const BlogDetail = () => {
+  const [blog, setBlog] = useState();
+  const {id} = useParams();
+
+  const baseURL = `http://localhost:8080/miniblog/backend/v1/blogs/${id}`;
+  const headers = {
+      'apikey': "2347edfd-c55c-4f59-96ee-600492f904f3",
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+  }
+    
+  useEffect(() => {
+    axios.get(baseURL, { headers })
+        .then((response) => {
+          setBlog(response.data);
+        });
+    }, [id]);
+
   return (
     <div className={style["detail"]}>
       <img
-        src="https://chamsocxehoi.org/wp-content/uploads/2020/11/Photographer.jpg"
+        src={blog?.image}
         alt="image"
       />
       <div className={style["detail__body"]}>
-        <div className={style["detail__body__header1"]}>
-          Facilis eveniet dolor ipsa maxime veniam eum assumenda deleniti fuga
+        <div className={style["detail__body__header1"]}>{blog?.title}
         </div>
-        <p className={style['detail__body__info']}>June 25, 2020 | ART</p>
+        <p className={style['detail__body__info']}>
+        <Moment date={blog?.createdAt} format='DD MMM, YYYY' /> | {blog?.category} </p>
         <hr />
-        <p>
-          The rich text elements allows you to create and format headings,
-          paragraph, blockquotes, image. and video all in one place onstead of
-          having to add and format them individually. Just double-click and
-          easily create content.
-        </p>
-        <div className={style["detail__body__header2"]}>
-          Something else here
-        </div>
         <p className={style['detail__body__last-text']}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus,
-          corrupti? Soluta sed quidem unde minus. Facilis eveniet dolor ipsa
-          maxime veniam eum assumenda deleniti fuga aperiam corporis commodi,
-          cum consequatur?
-          <br />
-          <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-          quibusdam quidem, ea excepturi quod, porro, ut id voluptate dicta
-          placeat suscipit vero nam voluptas ab distinctio nobis voluptatibus
-          nemo facere!
+          {blog?.detail}
         </p>
         <Link className={style["detail__body__touch"]} to="/">
         ← All posts

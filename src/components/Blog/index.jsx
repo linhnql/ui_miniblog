@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
+import Moment from 'react-moment';
 
 const Blog = (blog) => {
   return (
@@ -13,13 +14,12 @@ const Blog = (blog) => {
         <div className={style["blog__body__title"]}>
           {blog.title}
         </div>
-        <div className={style["blog__body__info"]}>June 25, 2020 | {blog.category} </div>
-        <span> { blog.intro }
-          {/* The rich text elements allows you to create and format headings,
-          paragraph, blockquotes, image. and video all in one place onstead of
-          having to add and format. */}
+        {console.log(blog.id)}
+        <div className={style["blog__body__info"]}><Moment date={blog.createdAt} format='DD MMM, YYYY' /> | {blog.category} </div>
+        <span> 
+          { blog.intro }
           <span> </span>
-          <Link className={style["blog__body__info"]} to="/id">
+          <Link className={style["blog__body__info"]} to={`/blogs/${blog.id}`}>
             Read more...
           </Link>
         </span>

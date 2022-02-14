@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const BlogList = () => {
     const [blogs, setBlogs] = useState([]);
-    const baseURL = `http://localhost:8080/miniblog/backend/v1/blogs/1347edfd-c11c-4f59-96ee-600492f933f3`;
+    const baseURL = `http://localhost:8080/miniblog/backend/v1/blogs`;
     const headers = {
         'apikey': "2347edfd-c55c-4f59-96ee-600492f904f3",
         'Content-Type': 'application/json',
@@ -24,7 +24,8 @@ const BlogList = () => {
         <div className="blog-list">
             {
                 blogs.map((blog) => {
-                    return <Blog key={blog.id} blog={blog}/>
+                    console.log(blog);
+                    return  <Blog key={blog.id} id={blog.id} image={blog.image} title={blog.title} intro={blog.intro} createdAt={blog.createdAt} category={blog.category} />
                 })
             }
         </div>

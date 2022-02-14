@@ -46,9 +46,7 @@ export default class Header extends Component {
               <Route exact path="/contact">
                 <Contact />
               </Route>
-              <Route path="/id">
-                <BlogDetail />
-              </Route>
+              <Route exact path="/blogs/:id" component={BlogDetail} />
               <Route path="/">
                 <BlogList />
               </Route>
