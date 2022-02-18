@@ -1,7 +1,8 @@
 .detail{
-    width: 64%;
+    width: 62%;
     float: right;
-    margin: 16.5vh 9vw 13vh 0;
+    margin: 16.5vh 10vw 8vh 0;
+    // margin-right: 5.5em;
     background-color: #fff;
     border-radius: 20px;
     
@@ -36,7 +37,7 @@
         }
         
         &__touch{
-            position: absolute;
+            position:absolute;
             padding: 10px 20px;
             background-color: #969696;
             border-radius: 10px;
@@ -44,8 +45,8 @@
             font-weight: 450;
             color: #fff;
             text-decoration: none;
-            margin-top: 10vh;
-            margin-left: -16vw;
+            margin-top: 3em;
+            margin-left: -1.6em;
         }
 
         &__touch:hover{
@@ -55,14 +56,6 @@
         &__touch:focus{
             background-color: #686868;
         }
-    }
-}
-
-@media only screen and (max-width : 800px) {
-    .detail {
-        clear: both;
-        width: 80%;
-        height: 25vh;
     }
 }
 
@@ -89,6 +82,8 @@ hr{
 }
 
 .delete{
+    float: right;
+    margin-bottom: 1em;
     background-color: #969696;
     border: none;
     border-radius: 10px;

@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { alertService } from "../../Alert/alert.service";
 import axios from "axios";
+import "./styles.css";
 
-const AddBlog = () => {
-  const [values, setValues] = useState({
-    title: "",
-    category: "ART",
-    image: "",
-    intro: "",
-    detail: ""
-  });
+const categorySelect = [
+  "ART", "MUSIC", "TRAVEL", "TECH"
+]
+
+const EditBlog = () => {
   const [loader, setLoader] = useState(false);
+  const [values, setValues] = useState({});
+  const { id } = useParams();
+  const [blogId, setBlogId] = useState();
+
+  const baseURL = `http://localhost:8082/miniblog/backend/v1/blogs/${id}`;
+  const headers = {
+    apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  };
+
+  useEffect(() => {
+    axios.get(baseURL, { headers }).then((response) => {
+      setValues(response.data);
+      setBlogId(id)
+    });
+  }, [blogId]);
 
   const handleChange = (event) => {
     setValues({
@@ -19,22 +35,15 @@ const AddBlog = () => {
     });
   };
 
-  const setCategory = (values) => {
-    setValues.category = values;
-    var e = document.getElementById("category");
-    var strUser = e.options[e.selectedIndex].text;
-    console.log(strUser);
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoader(true);
     if (!values.title || !values.detail) {
-      alert("Please enter all mandatory fields!");
+      alert("Please enter ALL mandatory fields!");
     } else {
       axios
-        .post(
-          "http://localhost:8082/miniblog/backend/v1/blogs",
+        .put(
+          `http://localhost:8082/miniblog/backend/v1/blogs/${id}`,
           {
             ...values,
           },
@@ -42,25 +51,20 @@ const AddBlog = () => {
             headers: {
               apikey: "2347edfd-c55c-4f59-96ee-600492f904f3",
               "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
           }
         )
         .then((request) => {
           setValues(request.data);
-          alert("Add successful. Thank you!");
+          alert(`Edit ${values.title} successful. Thank you!`);
           setLoader(false);
-          setValues({
-            title: "",
-            category: "ART",
-            image: "",
-            intro: "",
-            detail: ""
-          })
-          console.log(request);
+          window.location.replace(`/blogs/${id}`);
+          // console.log(request);
         })
         .catch((error) => {
           alert("Something went wrong! Please try again.");
+          console.log(values);
         });
     }
   };
@@ -80,7 +84,7 @@ const AddBlog = () => {
               id="title"
               name="title"
               placeholder="Blog title..."
-              value={values.title}
+              defaultValue={values?.title}
               onChange={handleChange}
             />
           </div>
@@ -92,11 +96,10 @@ const AddBlog = () => {
             </label>
           </div>
           <div className="col-75">
-            <select id="category" name="category" defaultValue={values.category} onChange={handleChange}>
-              <option selected={values.category==="ART"}>ART</option>
-              <option selected={values.category==="MUSIC"}>MUSIC</option>
-              <option selected={values.category==="TRAVEL"}>TRAVEL</option>
-              <option selected={values.category==="TECH"}>TECH</option>
+            <select id="category" name="category" onChange={handleChange}>
+              {categorySelect.map((item) => (
+                <option key={item} selected={values.category === item}>{item}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -107,23 +110,27 @@ const AddBlog = () => {
           <div className="col-75">
             <input
               type="text"
+              id="image"
               name="image"
               placeholder="Image url..."
-              value={values.image}
+              defaultValue={values?.image}
               onChange={handleChange}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-25">
-            <label htmlFor="subject">Introduction</label>
+            <label htmlFor="subject">
+              Introduction
+            </label>
           </div>
           <div className="col-75">
             <textarea
+              id="intro"
               name="intro"
               placeholder="Write something..."
               rows="6"
-              value={values.intro}
+              defaultValue={values?.intro}
               onChange={handleChange}
             />
           </div>
@@ -136,20 +143,21 @@ const AddBlog = () => {
           </div>
           <div className="col-75">
             <textarea
+              id="detail"
               name="detail"
               placeholder="Write something..."
               rows="20"
-              value={values.detail}
+              defaultValue={values?.detail}
               onChange={handleChange}
             />
           </div>
         </div>
         <div className="row">
-          <input 
-            type="submit" 
-            name="submit" 
-            value="Submit" 
-            onClick={(e) => handleSubmit(e)} 
+          <input
+            type="submit"
+            name="submit"
+            value="Submit"
+            onClick={(e) => handleSubmit(e)}
           />
         </div>
       </form>
@@ -157,4 +165,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default EditBlog;

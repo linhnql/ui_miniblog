@@ -1,11 +1,13 @@
 .info{
-    margin-left: 9%;
-    padding-top: 2rem;
+    margin-left: 9vw;
+    padding-top: 16.5vh;
+    position: fixed;
+    width: 10.5%;
     
     &__body{
         padding: 2em;
         border-radius: 20px !important;
-        width:12%;
+        width: 100%;
         background-color: #fff;
         &--featured{
             font-size: 1.1em;
@@ -19,7 +21,7 @@
                 color: rgb(192,184,178);
             }
         }
-
+ 
         &--image{
             width: 90%;
             height: 180px;
@@ -33,6 +35,13 @@
             margin: auto;
             margin-bottom: 2rem;
         }
+
+        p{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 6;  
+             overflow: hidden;
+        } 
     }
 }
 
@@ -40,4 +49,10 @@ hr {
     border-top: 1px solid #afaaaa;
     width:55%;
     margin-left: 0px;
+}
+
+@media screen and (max-width: 950px) {
+    .info {
+        display: none;
+    }
 }
