@@ -4,6 +4,7 @@ import style from "./styles.module.scss";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Moment from "react-moment";
+import { alertService } from "../Alert/alert.service";
 
 const BlogDetail = () => {
   const [blog, setBlog] = useState();
@@ -27,7 +28,7 @@ const BlogDetail = () => {
     axios
       .delete(baseURL, { headers })
       .then(() => {
-        alert("Delete successful. Thank you!");
+        alertService.success("Delete successful. Thank you!");
         window.location.replace("/");
       })
       .catch((error) => alert("Something went wrong. Please try again."));

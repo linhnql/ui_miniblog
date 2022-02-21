@@ -2,14 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 import Moment from "react-moment";
+import LazyLoad from "react-lazyload";
 
-const Blog = (blog) => {
+const Blog = ({ blog }) => {
   return (
     <div className={style["blog"]}>
-      <div className={style["blog__img"]}>
-        <img src={blog.image} alt="image" />
-      </div>
-      
+      <LazyLoad
+        once={true}
+        placeholder={<img src={`https://picsum.photos/id/5/5/5`} alt="..." />}
+      >
+        <div className={style["blog__img"]}>
+          <img src={blog.image} alt="image" />
+        </div>
+      </LazyLoad>
       <div className={style["blog__body"]}>
         <Link className={style["blog__body__title"]} to={`/blogs/${blog.id}`}>
           {blog.title}

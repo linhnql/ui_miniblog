@@ -57,13 +57,13 @@ const EditBlog = () => {
         )
         .then((request) => {
           setValues(request.data);
-          alert(`Edit ${values.title} successful. Thank you!`);
+          alertService.success(`Edit ${values.title} successful. Thank you!`);
           setLoader(false);
           window.location.replace(`/blogs/${id}`);
           // console.log(request);
         })
         .catch((error) => {
-          alert("Something went wrong! Please try again.");
+          alertService.error("Something went wrong! Please try again.");
           console.log(values);
         });
     }
